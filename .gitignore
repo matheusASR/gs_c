@@ -1,0 +1,19 @@
+# Pastas do Visual Studio
+.vs/
+*.user
+*.suo
+
+# Build / binários
+bin/
+obj/
+
+# Arquivos temporários
+*.log
+*.vsidx
+*.cache
+*.db
+*.pdb
+
+# Outras configurações locais
+*.userprefs
+*.csproj.user
