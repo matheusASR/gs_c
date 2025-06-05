@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace GS_C_.Services
@@ -9,7 +9,8 @@ namespace GS_C_.Services
 
         public void RegistrarAtividade(string descricao)
         {
-            Logs.Add($"[{DateTime.Now}] {descricao}");
+            string log = $"[{DateTime.Now}] {descricao}";
+            Logs.Add(log);
         }
 
         public void SimularErro(string input)
@@ -28,6 +29,31 @@ namespace GS_C_.Services
             {
                 RegistrarAtividade($"Erro capturado: {ex.Message}");
             }
+        }
+
+        public void RelatarOcorrencia(DateTime data, string descricao)
+        {
+            RegistrarAtividade($"Ocorrência relatada em {data:dd/MM/yyyy}: {descricao}");
+        }
+
+        public void GerarAlerta(string usuario, DateTime data)
+        {
+            if (usuario.ToLower() == "admin")
+            {
+                RegistrarAtividade($"Alerta de segurança: Acesso crítico por {usuario} em {data:dd/MM/yyyy}");
+            }
+        }
+
+        public void RegistrarFalhaServico(string servico)
+        {
+            RegistrarAtividade($"Falha registrada no serviço: {servico}");
+        }
+
+        public void GerarRelatorioFinal()
+        {
+            int totalAntes = Logs.Count;
+            RegistrarAtividade("==== Relatório Final Gerado ====");
+            RegistrarAtividade($"Total de logs registrados: {totalAntes}");
         }
     }
 }
