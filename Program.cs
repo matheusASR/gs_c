@@ -1,6 +1,5 @@
-﻿using System;
+using System;
 using GS_C_.Services;
-using GS_C_.Models;
 
 namespace GS_C_
 {
@@ -18,18 +17,71 @@ namespace GS_C_
             Console.Write("Senha: ");
             string senha = Console.ReadLine();
 
-            if (auth.Login(usuario, senha))
+            if (!auth.UsuarioExiste(usuario))
             {
-                Console.WriteLine("Login realizado com sucesso!");
-                Console.Write("Digite uma data para simular (ex: 2024-12-31): ");
-                string entrada = Console.ReadLine();
-
-                monitor.SimularErro(entrada);
-                monitor.RegistrarAtividade("Atividade normal após simulação.");
+                Console.WriteLine("Usuário não encontrado.");
+            }
+            else if (!auth.Login(usuario, senha))
+            {
+                Console.WriteLine("Senha incorreta.");
             }
             else
             {
-                Console.WriteLine("Usuário ou senha inválidos.");
+                Console.WriteLine("\nLogin realizado com sucesso!");
+
+                Console.Write("Digite uma data para simular (ex: 2024-12-31): ");
+                string entradaData = Console.ReadLine();
+                monitor.SimularErro(entradaData);
+
+                if (DateTime.TryParse(entradaData, out DateTime dataConvertida))
+                {
+                    Console.Write("Relate o ocorrido nesta data: ");
+                    string descricaoOcorrencia = Console.ReadLine();
+
+                    monitor.RelatarOcorrencia(dataConvertida, descricaoOcorrencia);
+                    monitor.GerarAlerta(usuario, dataConvertida);
+
+                    string resposta;
+                    do
+                    {
+                        Console.Write("Houve falha em algum serviço? (ex: Banco de Dados, DNS) (responda s para sim ou n para nao): ");
+                        resposta = Console.ReadLine()?.Trim().ToLower();
+                    } while (resposta != "s" && resposta != "n");
+
+                    if (resposta == "s")
+                    {
+                        Console.Write("Em qual serviço houve falha? ");
+                        string servico = Console.ReadLine();
+                        monitor.RegistrarFalhaServico(servico);
+                    }
+
+                    string[] palavrasCriticas = { "falha", "queda", "apagão", "erro", "pane", "energia caiu" };
+                    bool atividadeNormal = true;
+
+                    foreach (var palavra in palavrasCriticas)
+                    {
+                        if (descricaoOcorrencia.ToLower().Contains(palavra))
+                        {
+                            atividadeNormal = false;
+                            break;
+                        }
+                    }
+
+                    if (atividadeNormal)
+                    {
+                        monitor.RegistrarAtividade("Atividade normal após simulação.");
+                    }
+                    else
+                    {
+                        monitor.RegistrarAtividade("Atividade anormal detectada após simulação.");
+                    }
+                }
+                else
+                {
+                    monitor.RegistrarAtividade("Data inválida inserida. Pulos de funcionalidades dependentes de data.");
+                }
+
+                monitor.GerarRelatorioFinal();
             }
 
             Console.WriteLine("\n=== Logs Registrados ===");
@@ -43,3 +95,4 @@ namespace GS_C_
         }
     }
 }
+
