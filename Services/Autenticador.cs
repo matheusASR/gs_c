@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace GS_C_.Services
 {
@@ -7,8 +7,10 @@ namespace GS_C_.Services
         private readonly Dictionary<string, string> usuarios = new Dictionary<string, string>()
         {
             {"admin", "1234"},
-            {"usuario", "senha"}
+            {"user", "123"}
         };
+
+        public bool UsuarioExiste(string usuario) => usuarios.ContainsKey(usuario);
 
         public bool Login(string usuario, string senha)
         {
@@ -16,4 +18,3 @@ namespace GS_C_.Services
         }
     }
 }
-
