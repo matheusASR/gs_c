@@ -102,7 +102,6 @@ namespace GS_C_
                     Console.WriteLine(log);
                 }
 
-                // Pergunta se o usuário deseja repetir
                 string respostaFinal;
                 do
                 {
@@ -111,7 +110,7 @@ namespace GS_C_
                 } while (respostaFinal != "s" && respostaFinal != "n");
 
                 continuar = respostaFinal == "s";
-                Console.Clear(); // Limpa a tela para uma nova execução
+                Console.Clear(); 
             }
 
             Console.WriteLine("Encerrando o programa. Obrigado!");
