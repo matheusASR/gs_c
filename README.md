@@ -82,3 +82,6 @@ Consolida as ações e registra o total de logs até o momento.
 
 ### 9. Sistema de logs interno
 Todas as ações relevantes do sistema são registradas em memória e exibidas ao final.
+
+### 10. Reinício do sistema para novo registro
+Após cada execução, o usuário pode optar por realizar um novo registro ou encerrar o sistema.
