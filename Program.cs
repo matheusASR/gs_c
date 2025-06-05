@@ -8,26 +8,39 @@ namespace GS_C_
         static void Main(string[] args)
         {
             Autenticador auth = new Autenticador();
-            Monitoramento monitor = new Monitoramento();
 
-            Console.WriteLine("=== Sistema de Monitoramento Cibernético ===");
-            Console.Write("Usuário: ");
-            string usuario = Console.ReadLine();
+            bool continuar = true;
 
-            Console.Write("Senha: ");
-            string senha = Console.ReadLine();
+            while (continuar)
+            {
+                Monitoramento monitor = new Monitoramento();
 
-            if (!auth.UsuarioExiste(usuario))
-            {
-                Console.WriteLine("Usuário não encontrado.");
-            }
-            else if (!auth.Login(usuario, senha))
-            {
-                Console.WriteLine("Senha incorreta.");
-            }
-            else
-            {
-                Console.WriteLine("\nLogin realizado com sucesso!");
+                Console.WriteLine("=== Sistema de Monitoramento Cibernético ===");
+
+                bool autenticado = false;
+                string usuario = "";
+                while (!autenticado)
+                {
+                    Console.Write("Usuário: ");
+                    usuario = Console.ReadLine();
+
+                    Console.Write("Senha: ");
+                    string senha = Console.ReadLine();
+
+                    if (!auth.UsuarioExiste(usuario))
+                    {
+                        Console.WriteLine("Usuário não encontrado. Tente novamente.\n");
+                    }
+                    else if (!auth.Login(usuario, senha))
+                    {
+                        Console.WriteLine("Senha incorreta. Tente novamente.\n");
+                    }
+                    else
+                    {
+                        autenticado = true;
+                        Console.WriteLine("\nLogin realizado com sucesso!");
+                    }
+                }
 
                 Console.Write("Digite uma data para simular (ex: 2024-12-31): ");
                 string entradaData = Console.ReadLine();
@@ -82,16 +95,26 @@ namespace GS_C_
                 }
 
                 monitor.GerarRelatorioFinal();
+
+                Console.WriteLine("\n=== Logs Registrados ===");
+                foreach (var log in monitor.Logs)
+                {
+                    Console.WriteLine(log);
+                }
+
+                // Pergunta se o usuário deseja repetir
+                string respostaFinal;
+                do
+                {
+                    Console.Write("\nDeseja realizar outro registro? (digite s para sim ou n para nao): ");
+                    respostaFinal = Console.ReadLine()?.Trim().ToLower();
+                } while (respostaFinal != "s" && respostaFinal != "n");
+
+                continuar = respostaFinal == "s";
+                Console.Clear(); // Limpa a tela para uma nova execução
             }
 
-            Console.WriteLine("\n=== Logs Registrados ===");
-            foreach (var log in monitor.Logs)
-            {
-                Console.WriteLine(log);
-            }
-
-            Console.WriteLine("\nPressione qualquer tecla para sair.");
-            Console.ReadKey();
+            Console.WriteLine("Encerrando o programa. Obrigado!");
         }
     }
 }
