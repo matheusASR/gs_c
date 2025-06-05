@@ -1,3 +1,8 @@
+# GS - C
+## INTEGRANTES:
+MATHEUS AUGUSTO SANTOS REGO RM551466
+
+
 
 # Sistema de Monitoramento Cibernético em Falhas de Energia
 
