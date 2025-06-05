@@ -52,7 +52,9 @@ SistemaCiberEnergia/
 ## Funcionalidades
 
 ### 1. Autenticação com validação de senha
-Permite login apenas se usuário e senha estiverem corretos.
+Permite login apenas se usuário e senha estiverem corretos:
+  {"admin", "1234"},
+  {"user", "123"}
 Exibe "Usuário não encontrado" ou "Senha incorreta" com base na situação.
 
 ### 2. Simulação de erro com entrada de data
