@@ -46,32 +46,32 @@ SistemaCiberEnergia/
 
 ## Funcionalidades
 
-# 1. Autenticação com validação de senha
+### 1. Autenticação com validação de senha
 Permite login apenas se usuário e senha estiverem corretos.
 Exibe "Usuário não encontrado" ou "Senha incorreta" com base na situação.
 
-# 2. Simulação de erro com entrada de data
+### 2. Simulação de erro com entrada de data
 O usuário informa uma data e o sistema valida se é uma data válida.
 Em caso de erro, registra no log.
 
-# 3. Relato de ocorrência com base em uma data
+### 3. Relato de ocorrência com base em uma data
 Permite que o usuário descreva o que aconteceu na data simulada.
 
-# 4. Geração de alerta de segurança
+### 4. Geração de alerta de segurança
 Gera um alerta automaticamente se o usuário for admin.
 
-# 5. Verificação condicional de falhas em serviços
+### 5. Verificação condicional de falhas em serviços
 Pergunta se houve falha em algum serviço e só executa o registro se o usuário disser que sim.
 
-# 6. Registro do serviço que falhou
+### 6. Registro do serviço que falhou
 Se o usuário disser que houve falha, ele informa o nome do serviço (ex: DNS), e isso é registrado.
 
-# 7. Classificação da atividade como "normal" ou "anormal"
+### 7. Classificação da atividade como "normal" ou "anormal"
 O sistema analisa o texto do relato e identifica palavras críticas.
 Registra no log se a atividade foi normal ou anormal.
 
-# 8. Geração de relatório final
+### 8. Geração de relatório final
 Consolida as ações e registra o total de logs até o momento.
 
-# 9. Sistema de logs interno
+### 9. Sistema de logs interno
 Todas as ações relevantes do sistema são registradas em memória e exibidas ao final.
